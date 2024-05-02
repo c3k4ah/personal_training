@@ -1,0 +1,6 @@
+package com.dominick.training
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
