@@ -11,17 +11,23 @@ class HomePageStripe extends StatelessWidget {
         title: const Text('Stripe Home Page'),
       ),
       body: Center(
-        child: Stripe.buildPaymentRequestButton(
-          paymentRequestCreateOptions:
-              const PlatformPayWebPaymentRequestCreateOptions(
-            country: 'US',
-            currency: 'usd',
-            total: PlatformPayWebPaymentItem(
-              label: 'Total',
-              amount: 1000,
-            ),
-          ),
-          onPressed: () {},
+        child: ElevatedButton(
+          onPressed: () async {
+            // Stripe.buildPaymentRequestButton(
+            //   paymentRequestCreateOptions:
+            //       const PlatformPayWebPaymentRequestCreateOptions(
+            //     country: 'US',
+            //     currency: 'usd',
+            //     total: PlatformPayWebPaymentItem(
+            //       label: 'Total',
+            //       amount: 1000,
+            //     ),
+            //   ),
+            //   onPressed: () {},
+            // );
+            await Stripe.instance.presentPaymentSheet();
+          },
+          child: const Text('Open Payment Sheet'),
         ),
       ),
     );

@@ -1,14 +1,13 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
+import 'dependency_injection/injections.dart';
 import 'features/stripe/home.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initInjection();
   runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 
