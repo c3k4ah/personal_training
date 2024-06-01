@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'dependency_injection/injections.dart';
-import 'features/stripe/home.dart';
+import 'features/complexe_ui/switch_btn.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initInjection();
+  // await initInjection();
   runApp(
     const MyApp(),
   );
@@ -20,10 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Training',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePageStripe(),
+      home: const SwitchBtn(),
     );
   }
 }

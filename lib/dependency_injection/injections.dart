@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +32,10 @@ Future<void> initInjection() async {
 Future<void> service() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerSingleton<SharedPreferences>(sharedPreferences);
+
+  await dotenv.load(fileName: '.env');
+  Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY']!;
+  await Stripe.instance.applySettings();
 
   final dio = Dio(
     BaseOptions(
