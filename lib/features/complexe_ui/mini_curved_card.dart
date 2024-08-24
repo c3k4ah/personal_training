@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CurvedCard extends StatelessWidget {
+class MiniCurvedCard extends StatelessWidget {
   final double width;
   final double? radius;
-  const CurvedCard({
+  final Color color;
+  const MiniCurvedCard({
     super.key,
     required this.width,
     this.radius,
+    required this.color,
   });
 
   @override
@@ -15,19 +17,22 @@ class CurvedCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius ?? 30),
       child: CustomPaint(
         size: Size(width, (width * 1.125).toDouble()),
-        painter: CurderCardPainter(),
+        painter: MiniCurvedCardPainter(color: color),
       ),
     );
   }
 }
 
-class CurderCardPainter extends CustomPainter {
+class MiniCurvedCardPainter extends CustomPainter {
+  final Color color;
+
+  MiniCurvedCardPainter({super.repaint, required this.color});
   @override
   void paint(Canvas canvas, Size size) {
     // Layer 1
 
     Paint painFillOne = Paint()
-      ..color = Colors.black
+      ..color = color
       ..style = PaintingStyle.fill
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.butt
@@ -78,7 +83,7 @@ class CurderCardPainter extends CustomPainter {
     // Layer 1
 
     Paint paintStrokeZero = Paint()
-      ..color = Colors.black
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.butt

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:training/features/complexe_ui/curved_card.dart';
+import 'package:training/features/complexe_ui/mini_curved_card.dart';
+
+import 'big_curved_card.dart';
 
 class ComplexeUiPage extends StatefulWidget {
   const ComplexeUiPage({super.key});
@@ -17,7 +19,10 @@ class _ComplexeUiPageState extends State<ComplexeUiPage> {
         title: const Text('Complexe UI Page'),
       ),
       body: const Center(
-        child: CurvedCard(width: 250),
+        child: BigCurvedCard(
+          width: 350,
+          color: Colors.pink,
+        ),
       ),
     );
   }
