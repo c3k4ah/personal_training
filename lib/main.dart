@@ -1,12 +1,17 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
-import 'features/complexe_ui/switch_btn.dart';
+import 'features/complexe_ui/clip_path_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initInjection();
   runApp(
-    const MyApp(),
+    DevicePreview(
+      builder: (context) {
+        return const MyApp();
+      },
+    ),
   );
 }
 
@@ -21,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const SwitchBtn(),
+      home: const ComplexeUiPage(),
     );
   }
 }

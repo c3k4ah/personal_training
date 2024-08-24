@@ -2,45 +2,28 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class SwitchBtn extends StatefulWidget {
-  const SwitchBtn({super.key});
-
-  @override
-  State<SwitchBtn> createState() => _SwitchBtnState();
-}
-
-class _SwitchBtnState extends State<SwitchBtn> {
-  double initialPosition = 0.0;
-  bool isVertical = true;
-  Size size = const Size(50, 100);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey,
-      body: Center(
-        child: SwitchModeButton(
-          buttonSize: 100,
-          value: true,
-          onTap: (value) {
-            print(value);
-          },
-        ),
-      ),
-    );
-  }
-}
-
 class SwitchModeButton extends StatefulWidget {
   final double buttonSize;
   final bool? isVertical;
   final bool value;
+  final Color activeColor;
+  final Color inactiveColor;
+  final Color activeBtnColor;
+  final Color inactiveBtnColor;
   final Function(bool value) onTap;
+  final Function()? onEnd;
+
   const SwitchModeButton({
     super.key,
     required this.buttonSize,
     this.isVertical,
-    required this.onTap,
     required this.value,
+    required this.activeColor,
+    required this.inactiveColor,
+    required this.activeBtnColor,
+    required this.inactiveBtnColor,
+    this.onEnd,
+    required this.onTap,
   });
 
   @override
@@ -83,43 +66,52 @@ class _SwitchModeButtonState extends State<SwitchModeButton> {
   }
 
   Widget _buildSwitch(Size size) {
-    return Container(
-      height: size.height,
-      width: size.width,
-      padding: EdgeInsets.all(size.height * 0.02),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: Stack(
-        children: [
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-            bottom: initialPosition,
-            left: 0,
-            right: 0,
-            onEnd: () {},
-            child: InkWell(
-              hoverColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              onTap: () {
-                onValueCange();
-                widget.onTap(isActive);
-              },
+    return InkWell(
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      onTap: () {
+        onValueCange();
+        widget.onTap(isActive);
+      },
+      child: Container(
+        height: size.height,
+        width: size.width,
+        padding: EdgeInsets.all(size.height * 0.02),
+        decoration: BoxDecoration(
+          color: isActive ? widget.activeColor : widget.inactiveColor,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Stack(
+          children: [
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+              bottom: initialPosition,
+              left: 0,
+              right: 0,
+              onEnd: widget.onEnd,
               child: Container(
                 height: size.width - (size.height * 0.02),
                 width: size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.black,
+                padding: EdgeInsets.all(size.height * 0.02),
+                decoration: BoxDecoration(
+                  color: isActive
+                      ? widget.activeBtnColor
+                      : widget.inactiveBtnColor,
                   shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.light,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

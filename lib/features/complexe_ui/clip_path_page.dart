@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:training/features/complexe_ui/curved_card.dart';
 
 class ComplexeUiPage extends StatefulWidget {
   const ComplexeUiPage({super.key});
@@ -11,104 +12,101 @@ class _ComplexeUiPageState extends State<ComplexeUiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: AppBar(
         title: const Text('Complexe UI Page'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            ClipPath(
-              clipper: const MyClipper(),
-              child: Container(
-                color: Colors.blue,
-                height: 200,
-                width: MediaQuery.sizeOf(context).width,
-              ),
-            ),
-          ],
-        ),
+      body: const Center(
+        child: CurvedCard(width: 250),
       ),
     );
   }
 }
 
-class MyClipper extends CustomClipper<Path> {
-  const MyClipper();
-
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.lineTo(0, size.height);
-
-    path.lineTo(size.width / 2, size.height - 100);
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    throw UnimplementedError();
-  }
-}
-
-class MyPainter extends CustomPainter {
+class RPSCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint();
-    Path path = Path();
+    // Layer 1
 
-    // Path number 1
+    Paint paintFillZero = Paint()
+      ..color = const Color.fromARGB(255, 255, 255, 255)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = size.width * 0.00
+      ..strokeCap = StrokeCap.butt
+      ..strokeJoin = StrokeJoin.miter;
 
-    paint.color = const Color(0xffffffff).withOpacity(0);
-    path = Path();
-    path.lineTo(0, 0);
-    path.cubicTo(0, 0, size.width, 0, size.width, 0);
-    path.cubicTo(
-        size.width, 0, size.width, size.height, size.width, size.height);
-    path.cubicTo(size.width, size.height, 0, size.height, 0, size.height);
-    path.cubicTo(0, size.height, 0, 0, 0, 0);
-    canvas.drawPath(path, paint);
+    Path path_0 = Path();
+    path_0.moveTo(size.width * 0.2895167, size.height * 0.1080250);
+    path_0.quadraticBezierTo(size.width * 0.4338667, size.height * 0.1467750,
+        size.width * 0.5009000, size.height * 0.1477500);
+    path_0.cubicTo(
+        size.width * 0.5662500,
+        size.height * 0.1482000,
+        size.width * 0.8819000,
+        size.height * 0.0744500,
+        size.width * 0.9164167,
+        size.height * 0.1257000);
+    path_0.cubicTo(
+        size.width * 0.9498167,
+        size.height * 0.1730250,
+        size.width * 0.9341000,
+        size.height * 0.3751750,
+        size.width * 0.9350000,
+        size.height * 0.4987500);
+    path_0.cubicTo(
+        size.width * 0.9333000,
+        size.height * 0.6275250,
+        size.width * 0.9511167,
+        size.height * 0.8003750,
+        size.width * 0.9165167,
+        size.height * 0.8750750);
+    path_0.cubicTo(
+        size.width * 0.8666833,
+        size.height * 0.9262000,
+        size.width * 0.5832500,
+        size.height * 0.8498750,
+        size.width * 0.4998333,
+        size.height * 0.8491000);
+    path_0.cubicTo(
+        size.width * 0.4160000,
+        size.height * 0.8506500,
+        size.width * 0.1180500,
+        size.height * 0.9222000,
+        size.width * 0.0844333,
+        size.height * 0.8718250);
+    path_0.cubicTo(
+        size.width * 0.0514167,
+        size.height * 0.8247000,
+        size.width * 0.0653333,
+        size.height * 0.6221750,
+        size.width * 0.0644000,
+        size.height * 0.5000500);
+    path_0.cubicTo(
+        size.width * 0.0645167,
+        size.height * 0.3758000,
+        size.width * 0.0503833,
+        size.height * 0.1742500,
+        size.width * 0.0841667,
+        size.height * 0.1262500);
+    path_0.quadraticBezierTo(size.width * 0.1164667, size.height * 0.0765750,
+        size.width * 0.2891667, size.height * 0.1075000);
 
-    // Path number 2
+    canvas.drawPath(path_0, paintFillZero);
 
-    paint.color = const Color(0xffff5252).withOpacity(1);
-    path = Path();
-    path.lineTo(0, size.height);
-    path.cubicTo(size.width * 0.09, size.height * 0.93, size.width * 0.11,
-        size.height * 0.78, size.width * 0.11, size.height * 0.66);
-    path.cubicTo(size.width * 0.11, size.height * 0.49, size.width * 0.16,
-        size.height * 0.37, size.width / 4, size.height * 0.28);
-    path.cubicTo(size.width * 0.36, size.height * 0.23, size.width * 0.54,
-        size.height * 0.18, size.width * 0.68, size.height * 0.16);
-    path.cubicTo(size.width * 0.81, size.height * 0.13, size.width * 0.89,
-        size.height * 0.07, size.width * 0.98, 0);
-    path.cubicTo(
-        size.width * 0.94, 0, size.width * 0.86, 0, size.width * 0.84, 0);
-    path.cubicTo(size.width * 0.56, 0, size.width * 0.28, 0, 0, 0);
-    path.cubicTo(0, 0, 0, size.height, 0, size.height);
-    canvas.drawPath(path, paint);
+    // Layer 1
 
-    // Path number 3
+    Paint paintStrokeZero = Paint()
+      ..color = const Color.fromARGB(245, 255, 255, 255)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = size.width * 0.00
+      ..strokeCap = StrokeCap.butt
+      ..strokeJoin = StrokeJoin.miter;
 
-    paint.color = const Color(0xffffab40).withOpacity(1);
-    path = Path();
-    path.lineTo(size.width, size.height / 5);
-    path.cubicTo(size.width, size.height / 5, size.width * 0.94,
-        size.height * 0.88, size.width * 0.65, size.height * 0.93);
-    path.cubicTo(size.width * 0.36, size.height * 0.97, size.width / 5,
-        size.height, size.width / 5, size.height);
-    path.cubicTo(size.width / 5, size.height, size.width, size.height,
-        size.width, size.height);
-    path.cubicTo(size.width, size.height, size.width, size.height / 5,
-        size.width, size.height / 5);
-    canvas.drawPath(path, paint);
+    canvas.drawPath(path_0, paintStrokeZero);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
   }
 }
