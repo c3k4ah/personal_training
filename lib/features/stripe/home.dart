@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:training/features/stripe/card_singl.dart';
 
 class HomePageStripe extends StatefulWidget {
   const HomePageStripe({super.key});
@@ -19,16 +18,16 @@ class _HomePageStripeState extends State<HomePageStripe> {
       body: const Column(
         children: [],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await StripeSingleton().makePayment(
-            amount: 1000.0,
-            successAcknowledgement: (p0) {},
-            errorAcknowledgement: (p0) {},
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     await StripeSingleton().makePayment(
+      //       amount: 1000.0,
+      //       successAcknowledgement: (p0) {},
+      //       errorAcknowledgement: (p0) {},
+      //     );
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

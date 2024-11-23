@@ -1,17 +1,13 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
-import 'features/complexe_ui/clip_path_page.dart';
+import 'features/watches_store/home_page.dart';
+import 'features/watches_store/market_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initInjection();
   runApp(
-    DevicePreview(
-      builder: (context) {
-        return const MyApp();
-      },
-    ),
+    const MyApp(),
   );
 }
 
@@ -23,10 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Training',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const ComplexeUiPage(),
+      home: const WatchesProductsPage(),
     );
   }
 }

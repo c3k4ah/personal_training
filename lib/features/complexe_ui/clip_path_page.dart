@@ -1,7 +1,9 @@
+// ignore_for_file: unnecessary_import
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:training/features/complexe_ui/mini_curved_card.dart';
 
-import 'big_curved_card.dart';
 
 class ComplexeUiPage extends StatefulWidget {
   const ComplexeUiPage({super.key});
@@ -14,104 +16,109 @@ class _ComplexeUiPageState extends State<ComplexeUiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
-      appBar: AppBar(
-        title: const Text('Complexe UI Page'),
-      ),
-      body: const Center(
-        child: BigCurvedCard(
-          width: 350,
-          color: Colors.pink,
+      body: SizedBox(
+        height: MediaQuery.sizeOf(context).height,
+        width: MediaQuery.sizeOf(context).width,
+        child: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                height: 60,
+                width: double.infinity,
+                color: Colors.red,
+              ),
+              Container(
+                height: 150,
+                width: double.infinity,
+                color: Colors.amber,
+              ),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5.2,
+                  mainAxisSpacing: 5.5,
+                  childAspectRatio: 1.1,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: List.generate(
+                    cardData.length,
+                    (index) {
+                      MiniCardDataModel data = cardData[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 5,
+                        ),
+                        child: MiniCurvedCard(
+                          width: 100,
+                          color: data.color,
+                          radius: 20,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.black,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class RPSCustomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Layer 1
+List<MiniCardDataModel> cardData = [
+  MiniCardDataModel(
+    title: "230k",
+    subtitle: "Sales",
+    icon: Icons.circle,
+    color: Colors.yellow.shade800,
+  ),
+  MiniCardDataModel(
+    title: "230k",
+    subtitle: "Sales",
+    icon: Icons.circle,
+    color: Colors.green.shade700,
+  ),
+  MiniCardDataModel(
+    title: "230k",
+    subtitle: "Sales",
+    icon: Icons.circle,
+    color: Colors.pink.shade800,
+  ),
+  MiniCardDataModel(
+    title: "230k",
+    subtitle: "Sales",
+    icon: Icons.circle,
+    color: Colors.blue.shade800,
+  ),
+];
 
-    Paint paintFillZero = Paint()
-      ..color = const Color.fromARGB(255, 255, 255, 255)
-      ..style = PaintingStyle.fill
-      ..strokeWidth = size.width * 0.00
-      ..strokeCap = StrokeCap.butt
-      ..strokeJoin = StrokeJoin.miter;
+class MiniCardDataModel {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Color color;
 
-    Path path_0 = Path();
-    path_0.moveTo(size.width * 0.2895167, size.height * 0.1080250);
-    path_0.quadraticBezierTo(size.width * 0.4338667, size.height * 0.1467750,
-        size.width * 0.5009000, size.height * 0.1477500);
-    path_0.cubicTo(
-        size.width * 0.5662500,
-        size.height * 0.1482000,
-        size.width * 0.8819000,
-        size.height * 0.0744500,
-        size.width * 0.9164167,
-        size.height * 0.1257000);
-    path_0.cubicTo(
-        size.width * 0.9498167,
-        size.height * 0.1730250,
-        size.width * 0.9341000,
-        size.height * 0.3751750,
-        size.width * 0.9350000,
-        size.height * 0.4987500);
-    path_0.cubicTo(
-        size.width * 0.9333000,
-        size.height * 0.6275250,
-        size.width * 0.9511167,
-        size.height * 0.8003750,
-        size.width * 0.9165167,
-        size.height * 0.8750750);
-    path_0.cubicTo(
-        size.width * 0.8666833,
-        size.height * 0.9262000,
-        size.width * 0.5832500,
-        size.height * 0.8498750,
-        size.width * 0.4998333,
-        size.height * 0.8491000);
-    path_0.cubicTo(
-        size.width * 0.4160000,
-        size.height * 0.8506500,
-        size.width * 0.1180500,
-        size.height * 0.9222000,
-        size.width * 0.0844333,
-        size.height * 0.8718250);
-    path_0.cubicTo(
-        size.width * 0.0514167,
-        size.height * 0.8247000,
-        size.width * 0.0653333,
-        size.height * 0.6221750,
-        size.width * 0.0644000,
-        size.height * 0.5000500);
-    path_0.cubicTo(
-        size.width * 0.0645167,
-        size.height * 0.3758000,
-        size.width * 0.0503833,
-        size.height * 0.1742500,
-        size.width * 0.0841667,
-        size.height * 0.1262500);
-    path_0.quadraticBezierTo(size.width * 0.1164667, size.height * 0.0765750,
-        size.width * 0.2891667, size.height * 0.1075000);
-
-    canvas.drawPath(path_0, paintFillZero);
-
-    // Layer 1
-
-    Paint paintStrokeZero = Paint()
-      ..color = const Color.fromARGB(245, 255, 255, 255)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = size.width * 0.00
-      ..strokeCap = StrokeCap.butt
-      ..strokeJoin = StrokeJoin.miter;
-
-    canvas.drawPath(path_0, paintStrokeZero);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
+  MiniCardDataModel({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.color,
+  });
 }

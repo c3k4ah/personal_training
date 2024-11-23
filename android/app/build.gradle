@@ -66,5 +66,5 @@ flutter {
 
 dependencies {
     //implement stripe android
-    implementation 'com.stripe:stripe-android:17.1.1'
+    // implementation 'com.stripe:stripe-android:17.1.1'
 }

@@ -102,7 +102,7 @@ class _SwitchModeButtonState extends State<SwitchModeButton> {
                       : widget.inactiveBtnColor,
                   shape: BoxShape.circle,
                 ),
-                child: Center(
+                child: const Center(
                   child: Icon(
                     Icons.light,
                     color: Colors.black,

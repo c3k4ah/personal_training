@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MiniCurvedCard extends StatelessWidget {
   final double width;
+  final Widget child;
   final double? radius;
   final Color color;
   const MiniCurvedCard({
@@ -9,15 +10,29 @@ class MiniCurvedCard extends StatelessWidget {
     required this.width,
     this.radius,
     required this.color,
+    required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius ?? 30),
-      child: CustomPaint(
-        size: Size(width, (width * 1.125).toDouble()),
-        painter: MiniCurvedCardPainter(color: color),
+      child: SizedBox(
+        width: width,
+        height: (width * 1.125).toDouble(),
+        child: Stack(
+          children: [
+            CustomPaint(
+              size: const Size(double.infinity, double.infinity),
+              painter: MiniCurvedCardPainter(color: color),
+            ),
+            SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: child,
+            )
+          ],
+        ),
       ),
     );
   }
